@@ -36,6 +36,7 @@ function luckysheetDrawgridRowTitle(scrollHeight, drawHeight, offsetTop) {
     let luckysheetTableContent = $("#luckysheetTableContent")
         .get(0)
         .getContext("2d");
+
     luckysheetTableContent.save();
     luckysheetTableContent.scale(Store.devicePixelRatio, Store.devicePixelRatio);
 
@@ -97,14 +98,15 @@ function luckysheetDrawgridRowTitle(scrollHeight, drawHeight, offsetTop) {
 
         if (Store.config["rowhidden"] != null && Store.config["rowhidden"][r] != null) {
         } else {
-            luckysheetTableContent.fillStyle = "#ffffff";
+            luckysheetTableContent.fillStyle = getComputedStyle(luckysheetTableContent.canvas).getPropertyValue("--table-row-header-cell"); //row header cell color
+            
             luckysheetTableContent.fillRect(
                 0,
                 start_r + offsetTop + firstOffset,
                 Store.rowHeaderWidth - 1,
                 end_r - start_r + 1 + lastOffset - firstOffset,
             );
-            luckysheetTableContent.fillStyle = "#000000";
+            luckysheetTableContent.fillStyle = getComputedStyle(luckysheetTableContent.canvas).getPropertyValue("--table-row-header-text"); //row header text color
 
             //行标题栏序列号
             luckysheetTableContent.save(); //save scale before draw text
@@ -129,7 +131,7 @@ function luckysheetDrawgridRowTitle(scrollHeight, drawHeight, offsetTop) {
         luckysheetTableContent.lineTo(Store.rowHeaderWidth - 2 + bodrder05, end_r + offsetTop - 2);
         luckysheetTableContent.lineWidth = 1;
 
-        luckysheetTableContent.strokeStyle = luckysheetdefaultstyle.strokeStyle;
+        luckysheetTableContent.strokeStyle = getComputedStyle(luckysheetTableContent.canvas).getPropertyValue("--table-cell-border");
         luckysheetTableContent.stroke();
         luckysheetTableContent.closePath();
 
@@ -244,8 +246,6 @@ function luckysheetDrawgridColumnTitle(scrollWidth, drawWidth, offsetLeft) {
     luckysheetTableContent.rect(offsetLeft - 1, 0, drawWidth, Store.columnHeaderHeight - 1);
     luckysheetTableContent.clip();
 
-    // console.log(offsetLeft, 0, drawWidth, Store.columnHeaderHeight -1);
-
     let end_c, start_c;
     let bodrder05 = 0.5; //Default 0.5
     let preEndC;
@@ -281,9 +281,9 @@ function luckysheetDrawgridColumnTitle(scrollWidth, drawWidth, offsetLeft) {
 
         if (Store.config["colhidden"] != null && Store.config["colhidden"][c] != null) {
         } else {
-            luckysheetTableContent.fillStyle = "#ffffff";
+            luckysheetTableContent.fillStyle = getComputedStyle(luckysheetTableContent.canvas).getPropertyValue("--table-column-header-cell"); // colum header fill
             luckysheetTableContent.fillRect(start_c + offsetLeft - 1, 0, end_c - start_c, Store.columnHeaderHeight - 1);
-            luckysheetTableContent.fillStyle = "#000000";
+            luckysheetTableContent.fillStyle = getComputedStyle(luckysheetTableContent.canvas).getPropertyValue("--table-column-header-text"); // colum header text
 
             //列标题栏序列号
             luckysheetTableContent.save(); //save scale before draw text
@@ -309,7 +309,7 @@ function luckysheetDrawgridColumnTitle(scrollWidth, drawWidth, offsetLeft) {
             luckysheetTableContent.moveTo(end_c + offsetLeft - 4 + bodrder05, 0);
             luckysheetTableContent.lineTo(end_c + offsetLeft - 4 + bodrder05, Store.columnHeaderHeight - 2);
             luckysheetTableContent.lineWidth = 1;
-            luckysheetTableContent.strokeStyle = luckysheetdefaultstyle.strokeStyle;
+            luckysheetTableContent.strokeStyle = getComputedStyle(luckysheetTableContent.canvas).getPropertyValue("--table-cell-border");
             luckysheetTableContent.closePath();
             luckysheetTableContent.stroke();
         } else if (Store.config["colhidden"] == null || Store.config["colhidden"][c] == null) {
@@ -318,7 +318,7 @@ function luckysheetDrawgridColumnTitle(scrollWidth, drawWidth, offsetLeft) {
             luckysheetTableContent.lineTo(end_c + offsetLeft - 2 + bodrder05, Store.columnHeaderHeight - 2);
 
             luckysheetTableContent.lineWidth = 1;
-            luckysheetTableContent.strokeStyle = luckysheetdefaultstyle.strokeStyle;
+            luckysheetTableContent.strokeStyle = getComputedStyle(luckysheetTableContent.canvas).getPropertyValue("--table-cell-border");
             luckysheetTableContent.closePath();
             luckysheetTableContent.stroke();
         }
@@ -516,7 +516,7 @@ function luckysheetDrawMain(
     fill_col_ed = Store.visibledatacolumn[dataset_col_ed];
 
     //表格canvas 初始化处理
-    luckysheetTableContent.fillStyle = "#ffffff";
+    luckysheetTableContent.fillStyle = getComputedStyle(luckysheetTableContent.canvas).getPropertyValue("--table-cell-border"); // table border color
     luckysheetTableContent.fillRect(
         offsetLeft - 1,
         offsetTop - 1,
@@ -1259,9 +1259,9 @@ let nullCellRender = function(
     }
 
     if (fillStyle == null) {
-        luckysheetTableContent.fillStyle = "#FFFFFF";
+        luckysheetTableContent.fillStyle = getComputedStyle(luckysheetTableContent.canvas).getPropertyValue("--table-cell-fill"); // default cell fill color with no content
     } else {
-        luckysheetTableContent.fillStyle = fillStyle;
+        luckysheetTableContent.fillStyle = "fillStyle";
     }
 
     // 这里计算canvas需要绘制的矩形范围时,需要留下原本单元格边框的位置
@@ -1358,7 +1358,7 @@ let nullCellRender = function(
             luckysheetTableContent.lineTo(end_c + offsetLeft - 2 + bodrder05, end_r + offsetTop);
             luckysheetTableContent.lineWidth = 1;
 
-            luckysheetTableContent.strokeStyle = luckysheetdefaultstyle.strokeStyle;
+            luckysheetTableContent.strokeStyle = getComputedStyle(luckysheetTableContent.canvas).getPropertyValue("--table-cell-border");
             luckysheetTableContent.stroke();
             luckysheetTableContent.closePath();
         }
@@ -1372,7 +1372,7 @@ let nullCellRender = function(
         luckysheetTableContent.lineTo(end_c + offsetLeft - 1, end_r + offsetTop - 2 + bodrder05);
         luckysheetTableContent.lineWidth = 1;
 
-        luckysheetTableContent.strokeStyle = luckysheetdefaultstyle.strokeStyle;
+        luckysheetTableContent.strokeStyle = getComputedStyle(luckysheetTableContent.canvas).getPropertyValue("--table-cell-border")
         luckysheetTableContent.stroke();
         luckysheetTableContent.closePath();
     }
@@ -1444,7 +1444,7 @@ let cellRender = function(
     }
     // luckysheetTableContent.textBaseline = 'top';
     if (fillStyle == null) {
-        luckysheetTableContent.fillStyle = "#FFFFFF";
+        luckysheetTableContent.fillStyle = getComputedStyle(luckysheetTableContent.canvas).getPropertyValue("--table-cell-fill"); // default cell fill color that has content
     } else {
         luckysheetTableContent.fillStyle = fillStyle;
     }
@@ -1720,7 +1720,7 @@ let cellRender = function(
                         luckysheetTableContent.fillStyle = my_gradient;
                     } else {
                         //单色
-                        luckysheetTableContent.fillStyle = format[0];
+                        luckysheetTableContent.fillStyle = magenta;
                     }
 
                     luckysheetTableContent.fillRect(x + w * minusLen, y, w * plusLen * valueLen, h);
@@ -1799,7 +1799,14 @@ let cellRender = function(
         }
 
         //单元格 文本颜色
-        luckysheetTableContent.fillStyle = menuButton.checkstatus(Store.flowdata, r, c, "fc");
+        luckysheetTableContent.fillStyle = menuButton.checkstatus(Store.flowdata, r, c, "fc"); //text color from picker
+
+        if (menuButton.checkstatus(Store.flowdata, r, c, "fc") === "rgb(51, 51, 51)") {
+            // it seems like the color starts out as rgb(51, 51, 51)
+            // then if you change the color it sets the color for that specific cell to a hex color
+            // the reset only sets to #000000 instead of rgb(51, 51, 51)
+            luckysheetTableContent.fillStyle = getComputedStyle(luckysheetTableContent.canvas).getPropertyValue("--table-cell-text-color");
+        }
 
         //若单元格有交替颜色 文本颜色
         if (checksAF != null && checksAF[0] != null) {
@@ -1814,6 +1821,8 @@ let cellRender = function(
         if (cell.ct && cell.ct.fa && cell.ct.fa.indexOf("[Red]") > -1 && cell.ct.t == "n" && cell.v < 0) {
             luckysheetTableContent.fillStyle = "#ff0000";
         }
+
+
 
         cellTextRender(textInfo, luckysheetTableContent, {
             pos_x: pos_x,
@@ -1831,7 +1840,7 @@ let cellRender = function(
             luckysheetTableContent.moveTo(end_c + offsetLeft - 2 + bodrder05, start_r + offsetTop);
             luckysheetTableContent.lineTo(end_c + offsetLeft - 2 + bodrder05, end_r + offsetTop);
             luckysheetTableContent.lineWidth = 1;
-            luckysheetTableContent.strokeStyle = luckysheetdefaultstyle.strokeStyle;
+            luckysheetTableContent.strokeStyle = getComputedStyle(luckysheetTableContent.canvas).getPropertyValue("--table-cell-border");
             luckysheetTableContent.stroke();
             luckysheetTableContent.closePath();
         }
@@ -1844,7 +1853,7 @@ let cellRender = function(
         luckysheetTableContent.moveTo(start_c + offsetLeft - 1, end_r + offsetTop - 2 + bodrder05);
         luckysheetTableContent.lineTo(end_c + offsetLeft - 1, end_r + offsetTop - 2 + bodrder05);
         luckysheetTableContent.lineWidth = 1;
-        luckysheetTableContent.strokeStyle = luckysheetdefaultstyle.strokeStyle;
+        luckysheetTableContent.strokeStyle = getComputedStyle(luckysheetTableContent.canvas).getPropertyValue("--table-cell-border");
         luckysheetTableContent.stroke();
         luckysheetTableContent.closePath();
     }
@@ -2221,7 +2230,6 @@ function cellTextRender(textInfo, ctx, option) {
     if (values == null) {
         return;
     }
-    // console.log(textInfo, pos_x, pos_y, values[0].width, values[0].left, ctx);
 
     // for(let i=0;i<values.length;i++){
     //     let word = values[i];

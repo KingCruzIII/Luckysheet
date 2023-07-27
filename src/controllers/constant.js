@@ -78,7 +78,7 @@ const gridHTML = function() {
                                 <span><i class="iconfont luckysheet-iconfont-yunhang" aria-hidden="true"></i></span>
                             </div> 
                             <div id="luckysheet-wa-functionbox-fx" class="luckysheet-wa-functionbox">
-                                <span><i class="iconfont luckysheet-iconfont-hanshu" aria-hidden="true" style="color:#333"></i></span> 
+                                <span><i class="iconfont luckysheet-iconfont-hanshu" aria-hidden="true" style="color:var(--text-secondary)"></i></span> 
                             </div> 
                             <div id="luckysheet-functionbox-container" class="luckysheet-mousedown-cancel">
                                 <div class="luckysheet-mousedown-cancel" dir="ltr">

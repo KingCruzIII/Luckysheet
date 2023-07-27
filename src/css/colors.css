@@ -1,0 +1,58 @@
+
+
+
+:root {
+  --background-primary: #fff;
+  --background-secondary: #fafafc;
+  --background-tertiary: #f3f3f2;
+  --border-primary: #d4d4d4;
+  --border-highlight: #333;
+  --text-primary: #000000;
+  --text-secondary: #333;
+  --text-tertiary: gray;
+  --button-primary: var(--background-primary);
+  --button-highlight: #efefef;
+  --button-press: orange;
+  --separator: var(--border-primary);
+
+  --function-bar: var(--background-primary);
+
+  --table-row-header-cell: var(--background-primary);
+  --table-row-header-text: var(--text-primary);
+  --table-column-header-cell: var(--background-primary);
+  --table-column-header-text: var(--text-primary);
+  --table-header-corner: var(--background-primary);
+
+  --table-cell-fill: var(--background-primary);
+  --table-cell-text-color: var(-border-primary);
+  --table-cell-border: var(--background-tertiary);
+  --table-background: var(--background-tertiary);
+
+  --menu-background: var(--background-primary);
+  --menu-border: var(--border-primary);
+  --menu-text: var(--text-primary);
+  --menu-item-hover: var(--button-highlight);
+  --menu-divider: var(--border-primary);
+  
+  --modal-background: var(--background-primary);
+  --modal-border: var(--border-primary);
+
+  --tool-tip-background: #2a2a2a;
+  --tool-tip-text: var(--background-secondary);
+  --tool-tip-border: var(--border-primary)
+  
+}
+
+/* :root {
+  --background-primary: #fff;
+  --background-secondary: #fafafc;
+  --background-tertiary: #f3f3f2;
+  --border-primary: #f3f3f2;
+  --border-secondary: #e5e5e5;
+  --border-highlight: #adadad;
+  --border-3: #d4d4d4;
+  --text-primary: #000000;
+  --text-secondary: #333;
+  --button-primary: var(--background-primary);
+  --button-highlight: #e6e6e6;
+} */
